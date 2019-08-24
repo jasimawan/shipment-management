@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSaveShipment(shipmentForm)" #shipmentForm="ngForm" *ngIf="!isLoading">
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      name="title"
+      [ngModel]="shipment?.title"
+      required
+      placeholder="Shipment Title"
+      minlength="3"
+      #title="ngModel">
+      <mat-error *ngIf="title.invalid">Please enter a shipment title.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      matInput
+      rows="6"
+      name="content"
+      [ngModel]="shipment?.content"
+      placeholder="Shipment Content"
+      required
+      #contnet="ngModel"></textarea>
+    <mat-error *ngIf="contnet.invalid">Please enter a shipment Content.</mat-error>
+  </mat-form-field>
+<button mat-raised-button
+        color="accent"
+        type="submit">Save Shipment</button>
+  </form>
+</mat-card>

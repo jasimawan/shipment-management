@@ -1,0 +1,9 @@
+<h2>Select Worker</h2>
+<mat-form-field>
+  <mat-label>Select Worker</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let worker of workers" [value]="worker.name">
+      {{worker.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
