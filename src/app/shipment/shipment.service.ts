@@ -80,10 +80,9 @@ export class ShipmentService {
 }
 
   assignShipment(assignTo: string, shipmentId: string){
-    const shipment: Shipment={id:shipmentId, title: null, content: null, assignedTo: assignTo};
-    console.log(shipment.id);
-    console.log(shipment.assignedTo);
-    this.http.put<{message: string, shipmentId: any}>('http://localhost:3000/api/shipments', shipment)
+    const shipment: Shipment= {id: shipmentId, title: null, content: null, assignedTo: assignTo};
+    console.log(shipmentId);
+    this.http.put<{message: string, shipmentId: any}>("http://localhost:3000/api/shipments/" + shipmentId,  shipment )
       .subscribe(response => {
         console.log(response);
       });
@@ -92,7 +91,7 @@ export class ShipmentService {
   openDialog() {
     const dialogRef = this.dialog.open(AssignShipmentComponent, {
       width: '250px',
-      data : {shipmentId: this.shipmentId}
+      data : this.shipmentId
     });
   }
 

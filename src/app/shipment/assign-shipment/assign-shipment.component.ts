@@ -27,7 +27,7 @@ export class AssignShipmentComponent implements OnInit, OnDestroy{
   }
 
   assignShipment(selectedValue: string){
-    this.shipmentService.assignShipment(selectedValue, this.data);
+    this.shipmentService.assignShipment(selectedValue, this.data.toString());
   }
 
   ngOnDestroy() {

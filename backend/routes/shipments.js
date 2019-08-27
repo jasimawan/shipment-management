@@ -2,6 +2,7 @@ const express = require('express');
 
 const Shipment = require('../models/shipments');
 const User = require('../models/users');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.post("", (req,res,next) => {
   const shipment = new Shipment({
     title: req.body.title,
     content: req.body.content,
-    assignedTo: []
+    assignedTo: [req.body.assignedTo]
   });
   shipment.save()
     .then(createdShipment => {
@@ -21,21 +22,18 @@ router.post("", (req,res,next) => {
 });
 
 
-router.put("", (req,res,next) => {
-  console.log(req.params.id);
-  console.log(req.params.assignedTo);
-  User.findOne({name: req.params.assignedTo} )
+router.put("/:id", (req,res,next) => {
+  User.findOne({name: req.body.assignedTo} )
     .then(user => {
       if(user) {
-        User.update({name: req.params.assignedTo},
-            {$push: {assignedShipments: {_id: req.params.id}}})
-          .then(response => {
-            res.status(200).json(response);
-          });
-        Shipment.update({_id: req.params.id},
-            {$push: {assignedTo: {name: req.params.assignedTo}}})
-          .then(response => {
-            res.status(200).json(response);
+        User.updateOne({name: req.body.assignedTo },
+            {$push: {assignedShipments:  req.body.id}})
+          .then(() => {
+            Shipment.updateOne({ _id: req.params.id },
+              {$push: {assignedTo: req.body.assignedTo}})
+              .then(response => {
+                res.status(200).json({message: 'Shipment assigned Successfully!'});
+            });
           })
       }
     })
