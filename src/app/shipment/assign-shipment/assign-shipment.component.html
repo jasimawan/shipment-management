@@ -1,9 +1,12 @@
+<mat-card>
 <h2>Select Worker</h2>
 <mat-form-field>
-  <mat-label>Select Worker</mat-label>
-  <mat-select>
+  <mat-select  [(value)]="selectedValue" name="select" ngModel placeholder="Select Worker" #selectValue="ngModel" required>
     <mat-option *ngFor="let worker of workers" [value]="worker.name">
       {{worker.name}}
     </mat-option>
   </mat-select>
+  <mat-error *ngIf="selectValue.invalid">Please choose a worker.</mat-error>
 </mat-form-field>
+<button mat-raised-button color="accent" (click)="assignShipment(selectedValue)">Assign Shipment</button>
+</mat-card>

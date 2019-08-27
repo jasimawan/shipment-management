@@ -4,9 +4,17 @@ ul {
   margin: 0;
 }
 
+ul {
+  display: flex;
+}
+
 a {
   text-decoration: none;
   color: white;
+}
+
+.portal {
+  margin-left: 22rem;
 }
 
 .spacer {

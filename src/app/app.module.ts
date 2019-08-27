@@ -19,6 +19,8 @@ import {ShipmentCreateComponent} from './shipment/shipment-create/shipment-creat
 import {HeaderComponent} from './header/header.component';
 import {ShipmentListComponent} from './shipment/shipment-list/shipment-list.component';
 import {AssignShipmentComponent} from './shipment/assign-shipment/assign-shipment.component';
+import {LoginComponent} from './auth/login/login.component';
+import {SignupComponent} from './auth/signup/signup.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import {AssignShipmentComponent} from './shipment/assign-shipment/assign-shipmen
     ShipmentCreateComponent,
     HeaderComponent,
     AssignShipmentComponent,
+    LoginComponent,
+    SignupComponent,
     ShipmentListComponent
   ],
   imports: [

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
 import {Shipment} from './shipment.model';
-import {User} from '../users/user.Model';
+import {AuthData} from '../auth/auth-data.model';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
@@ -11,9 +11,10 @@ import {AssignShipmentComponent} from './assign-shipment/assign-shipment.compone
 @Injectable({providedIn: 'root'})
 export class ShipmentService {
   private shipments: Shipment[] = [];
-  private workers: User[] = [];
+  private workers: AuthData[] = [];
+  shipmentId: string;
   private shipmentsUpdated = new Subject<Shipment[]>();
-  private workersUpdated = new Subject<User[]>();
+  private workersUpdated = new Subject<AuthData[]>();
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
 
@@ -24,7 +25,8 @@ export class ShipmentService {
           return {
             title: shipment.title,
             content: shipment.content,
-            id: shipment._id
+            id: shipment._id,
+            assignedTo: shipment.assignedTo
           }
         });
       }))
@@ -52,7 +54,9 @@ export class ShipmentService {
 
 
   }
-
+  getShipmentId(shipmentId : string){
+    this.shipmentId = shipmentId;
+  }
   getWorkersUpdateListener() {
     return this.workersUpdated.asObservable();
   }
@@ -61,12 +65,9 @@ export class ShipmentService {
     return this.shipmentsUpdated.asObservable();
   }
 
-  getShipment( id: string) {
-    return this.http.get<{_id: string, title: string, content: string}>("http://localhost:3000/api/shipments/" + id);
-  }
 
   addShipment(title:string, content:string){
-    const shipment: Shipment={id:null,title: title, content:content};
+    const shipment: Shipment={id:null,title: title, content:content, assignedTo: null};
     this.http.post<{message: string, shipmentId: string}>('http://localhost:3000/api/shipments',shipment)
       .subscribe((responseData) => {
         console.log(responseData.message);
@@ -78,26 +79,20 @@ export class ShipmentService {
       });
 }
 
-  updateShipment(id:string, title: string, content: string) {
-      const shipment: Shipment = {id: id, title: title, content: content};
-      this.http.put("http://localhost:3000/api/shipments/" + id, shipment)
-        .subscribe(response => {
-          const updatedShipments = [...this.shipments];
-          const oldShipmentIndex = updatedShipments.findIndex(p => p.id === shipment.id);
-          updatedShipments[oldShipmentIndex] = shipment;
-          this.shipments = updatedShipments;
-          this.shipmentsUpdated.next([...this.shipments]);
-          this.router.navigate(["/"])
-        });
-}
+  assignShipment(assignTo: string, shipmentId: string){
+    const shipment: Shipment={id:shipmentId, title: null, content: null, assignedTo: assignTo};
+    console.log(shipment.id);
+    console.log(shipment.assignedTo);
+    this.http.put<{message: string, shipmentId: any}>('http://localhost:3000/api/shipments', shipment)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(AssignShipmentComponent, {
-      width: '250px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The assign-shipment was closed');
+      width: '250px',
+      data : {shipmentId: this.shipmentId}
     });
   }
 

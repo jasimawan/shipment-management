@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from '../../users/user.model';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AuthData} from '../../auth/auth-data.model';
 import {Subscription} from 'rxjs';
 import {ShipmentService} from '../shipment.service';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -12,17 +13,21 @@ import {ShipmentService} from '../shipment.service';
 
 export class AssignShipmentComponent implements OnInit, OnDestroy{
 
-  workers : User[] = [];
+  workers : AuthData[] = [];
   private workersSub : Subscription;
 
-  constructor(public shipmentService: ShipmentService) {}
+  constructor(public shipmentService: ShipmentService, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
     this.shipmentService.getWorkers();
     this.workersSub = this.shipmentService.getWorkersUpdateListener()
-      .subscribe((workers: User[]) => {
+      .subscribe((workers: AuthData[]) => {
         this.workers = workers;
       });
+  }
+
+  assignShipment(selectedValue: string){
+    this.shipmentService.assignShipment(selectedValue, this.data);
   }
 
   ngOnDestroy() {
