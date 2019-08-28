@@ -15,15 +15,20 @@ export class AssignShipmentComponent implements OnInit, OnDestroy{
 
   workers : AuthData[] = [];
   private workersSub : Subscription;
+  private assignedWorkers = [];
 
   constructor(public shipmentService: ShipmentService, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
+    this.shipmentService.getAssignedWorkers(this.data.toString());
+    this.assignedWorkers = this.shipmentService.getAssignedWorkersUpdateListener();
     this.shipmentService.getWorkers();
     this.workersSub = this.shipmentService.getWorkersUpdateListener()
       .subscribe((workers: AuthData[]) => {
         this.workers = workers;
+
       });
+
   }
 
   assignShipment(selectedValue: string){

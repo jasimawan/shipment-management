@@ -17,18 +17,25 @@ export class ShipmentListComponent implements OnInit, OnDestroy{
  isLoading = false;
  userId: string;
  userType: string;
+ userName: string;
  private authStatusSubs: Subscription;
  public userIsAuthenticated = false;
 
  constructor(public shipmentService: ShipmentService, private authService: AuthService) {}
 
   ngOnInit() {
-   this.shipmentService.getShipments();
-   this.isLoading = true;
-   const user = this.authService.getUserIdAndType();
-   this.userId = user.userId;
-   this.userType = user.userType;
-   this.shipmentsSub = this.shipmentService.getShipmentUpdateListener()
+    const user = this.authService.getUser();
+    this.userId = user.userId;
+    this.userType = user.userType;
+    this.userName = user.userName;
+    this.isLoading = true;
+    if(this.userType === 'admin'){
+      this.shipmentService.getShipments();
+    }
+    else if(this.userType === 'worker'){
+      this.shipmentService.getUserShipments(this.userName);
+    }
+    this.shipmentsSub = this.shipmentService.getShipmentUpdateListener()
      .subscribe((shipments: Shipment[]) => {
        this.isLoading = false;
        this.shipments = shipments;
@@ -38,9 +45,14 @@ export class ShipmentListComponent implements OnInit, OnDestroy{
       .getAuthStatusListner()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
-        this.userId = this.authService.getUserIdAndType().userId;
+        this.userId = this.authService.getUser().userId;
       })
   }
+
+  updateShipment(id: string){
+
+  }
+
   onDelete(shipmentId: string) {
     this.shipmentService.deleteShipment(shipmentId);
   }

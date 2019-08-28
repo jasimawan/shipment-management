@@ -22,8 +22,7 @@ router.post("/signup",(req,res,next)=> {
         email: req.body.email,
         name: req.body.name,
         type: req.body.type,
-        password: hash,
-        assignedShipments: []
+        password: hash
       });
       user.save()
         .then(result => {
@@ -67,7 +66,8 @@ router.post("/login", (req,res,next) => {
         token: token,
         expiresIn: 3600,
         userId: fetchedUser.id,
-        userType: fetchedUser.type
+        userType: fetchedUser.type,
+        userName: fetchedUser.name
       });
     })
     .catch(err => {

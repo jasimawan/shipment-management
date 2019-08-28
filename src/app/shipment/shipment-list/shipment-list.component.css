@@ -11,6 +11,10 @@ mat-spinner {
   margin: auto;
 }
 
+.mid{
+  text-align: center;
+}
+
 .details {
   margin-left: 3rem;
 }

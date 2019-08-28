@@ -15,6 +15,7 @@ export class ShipmentService {
   shipmentId: string;
   private shipmentsUpdated = new Subject<Shipment[]>();
   private workersUpdated = new Subject<AuthData[]>();
+  private assignedWorkers = [];
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
 
@@ -51,14 +52,25 @@ export class ShipmentService {
         this.workers = usersData;
         this.workersUpdated.next([...this.workers])
       })
-
-
   }
+
+  getAssignedWorkers(shipmentId : string) {
+    this.http.get<{message: string, assignedTo: any}>("http://localhost:3000/api/shipments/" +shipmentId)
+      .subscribe(shipment => {
+        this.assignedWorkers = shipment.assignedTo;
+      })
+  }
+
   getShipmentId(shipmentId : string){
     this.shipmentId = shipmentId;
   }
+
   getWorkersUpdateListener() {
     return this.workersUpdated.asObservable();
+  }
+
+  getAssignedWorkersUpdateListener() {
+    return this.assignedWorkers;
   }
 
   getShipmentUpdateListener() {
@@ -86,6 +98,24 @@ export class ShipmentService {
       .subscribe(response => {
         console.log(response);
       });
+  }
+  getUserShipments(userName: string){
+    const user = {userName: userName};
+    this.http.put<{message:string, shipments: any}>("http://localhost:3000/api/shipments/", user )
+      .pipe(map((shipmentData) => {
+        return shipmentData.shipments.map(shipment => {
+          return {
+            title: shipment.title,
+            content: shipment.content,
+            id: shipment._id,
+            assignedTo: shipment.assignedTo
+          }
+        });
+      }))
+      .subscribe(transformedShipments => {
+        this.shipments = transformedShipments;
+        this.shipmentsUpdated.next([...this.shipments])
+      })
   }
 
   openDialog() {

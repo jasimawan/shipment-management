@@ -1,5 +1,9 @@
 <mat-card>
-<h2>Select Worker</h2>
+  <h2>Already Assigned Workers</h2>
+  <p *ngFor="let assignedWorker of assignedWorkers">
+    {{assignedWorker}}
+  </p>
+  <h2>Select Worker</h2>
 <mat-form-field>
   <mat-select  [(value)]="selectedValue" name="select" ngModel placeholder="Select Worker" #selectValue="ngModel" required>
     <mat-option *ngFor="let worker of workers" [value]="worker.name">
