@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {Shipment} from '../shipment.model';
 import {ShipmentService} from '../shipment.service';
 import {AuthService} from '../../auth/auth.service';
+import {AuthData} from '../../auth/auth-data.model';
 
 @Component({
   selector: 'app-shipment-list',
@@ -13,7 +14,9 @@ import {AuthService} from '../../auth/auth.service';
 export class ShipmentListComponent implements OnInit, OnDestroy{
 
  shipments: Shipment[] = [];
+ workers: AuthData[] = [];
  private shipmentsSub: Subscription;
+ private workersSub: Subscription;
  isLoading = false;
  userId: string;
  userType: string;
@@ -40,6 +43,11 @@ export class ShipmentListComponent implements OnInit, OnDestroy{
        this.isLoading = false;
        this.shipments = shipments;
      });
+    this.authService.getWorkers();
+    this.workersSub = this.authService.getWorkersUpdateListener()
+      .subscribe((workers: AuthData[]) => {
+        this.workers = workers;
+    });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSubs = this.authService
       .getAuthStatusListner()
@@ -50,12 +58,17 @@ export class ShipmentListComponent implements OnInit, OnDestroy{
   }
 
   updateShipment(id: string){
-
+      this.shipmentService.updateShipment(id);
   }
 
   onDelete(shipmentId: string) {
     this.shipmentService.deleteShipment(shipmentId);
   }
+
+  onDeleteWorker(id: string) {
+    this.authService.deleteWorker(id);
+  }
+
   openDialog(shipmentId: string){
    this.shipmentService.getShipmentId(shipmentId);
    this.shipmentService.openDialog();

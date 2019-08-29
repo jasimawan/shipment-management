@@ -1,20 +1,41 @@
 <mat-spinner *ngIf="isLoading && userIsAuthenticated"></mat-spinner>
+
 <mat-card *ngIf="!userIsAuthenticated">
   <h1 class="mid">Welcome to Shipment Management Portal</h1>
   <h2 class="mid">Please Login with your valid Credentials!</h2>
 </mat-card>
+
+<h1 *ngIf="userIsAuthenticated" class="mid">Shipments</h1>
+<p class="info-text mat-body-1" *ngIf="shipments.length <=0 && !isLoading && userIsAuthenticated" >No shipments added yet!</p>
 <mat-accordion multi="true" *ngIf="shipments.length > 0 && !isLoading && userIsAuthenticated && userType === 'admin'">
   <mat-expansion-panel *ngFor="let shipment of shipments">
     <mat-expansion-panel-header>
       {{shipment.title}}
     </mat-expansion-panel-header>
     <h4>Details: </h4><p class="details">{{shipment.content}}</p>
+    <h4>Status: </h4><p class="details">{{shipment.status}}</p>
     <mat-action-row>
       <button mat-button color="secondary" (click)="openDialog(shipment.id)">Assign Shipment</button>
       <button mat-button color="warn" (click)="onDelete(shipment.id)">DELETE</button>
     </mat-action-row>
   </mat-expansion-panel>
+
+
+  <h1 *ngIf="userIsAuthenticated"  class="mid">Workers</h1>
+  <p class="info-text mat-body-1" *ngIf="workers.length <=0 && !isLoading && userIsAuthenticated" >No Workers added yet!</p>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let worker of workers">
+      <mat-expansion-panel-header>
+        {{worker.name}}
+      </mat-expansion-panel-header>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="onDeleteWorker(worker.id)">DELETE</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
 </mat-accordion>
+
 
 <mat-accordion multi="true" *ngIf="shipments.length > 0 && !isLoading && userIsAuthenticated && userType === 'worker'">
   <mat-expansion-panel *ngFor="let shipment of shipments">
@@ -22,9 +43,10 @@
       {{shipment.title}}
     </mat-expansion-panel-header>
     <h4>Details: </h4><p class="details">{{shipment.content}}</p>
+    <h4>Status: </h4><p class="details">{{shipment.status}}</p>
     <mat-action-row>
       <button mat-button color="secondary" (click)="updateShipment(shipment.id)">Update Shipment</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="shipments.length <=0 && !isLoading && userIsAuthenticated" >No shipments added yet!</p>
+

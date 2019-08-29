@@ -3,6 +3,7 @@ import {AuthData} from '../../auth/auth-data.model';
 import {Subscription} from 'rxjs';
 import {ShipmentService} from '../shipment.service';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {AuthService} from '../../auth/auth.service';
 
 
 @Component({
@@ -17,16 +18,15 @@ export class AssignShipmentComponent implements OnInit, OnDestroy{
   private workersSub : Subscription;
   private assignedWorkers = [];
 
-  constructor(public shipmentService: ShipmentService, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(public shipmentService: ShipmentService, public authService: AuthService, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
     this.shipmentService.getAssignedWorkers(this.data.toString());
     this.assignedWorkers = this.shipmentService.getAssignedWorkersUpdateListener();
-    this.shipmentService.getWorkers();
-    this.workersSub = this.shipmentService.getWorkersUpdateListener()
+    this.authService.getWorkers();
+    this.workersSub = this.authService.getWorkersUpdateListener()
       .subscribe((workers: AuthData[]) => {
         this.workers = workers;
-
       });
 
   }

@@ -11,10 +11,9 @@ import {AssignShipmentComponent} from './assign-shipment/assign-shipment.compone
 @Injectable({providedIn: 'root'})
 export class ShipmentService {
   private shipments: Shipment[] = [];
-  private workers: AuthData[] = [];
   shipmentId: string;
+  private userName: string;
   private shipmentsUpdated = new Subject<Shipment[]>();
-  private workersUpdated = new Subject<AuthData[]>();
   private assignedWorkers = [];
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
@@ -27,6 +26,7 @@ export class ShipmentService {
             title: shipment.title,
             content: shipment.content,
             id: shipment._id,
+            status: shipment.status,
             assignedTo: shipment.assignedTo
           }
         });
@@ -37,22 +37,6 @@ export class ShipmentService {
       });
   }
 
-  getWorkers(){
-    this.http.get<{message: string, users: any}>("http://localhost:3000/api/users/")
-      .pipe(map((userData) => {
-        return userData.users.map(user => {
-          return {
-            name: user.name,
-            content: user.type,
-            id: user._id
-          }
-        });
-      }))
-      .subscribe(usersData => {
-        this.workers = usersData;
-        this.workersUpdated.next([...this.workers])
-      })
-  }
 
   getAssignedWorkers(shipmentId : string) {
     this.http.get<{message: string, assignedTo: any}>("http://localhost:3000/api/shipments/" +shipmentId)
@@ -65,9 +49,6 @@ export class ShipmentService {
     this.shipmentId = shipmentId;
   }
 
-  getWorkersUpdateListener() {
-    return this.workersUpdated.asObservable();
-  }
 
   getAssignedWorkersUpdateListener() {
     return this.assignedWorkers;
@@ -79,7 +60,7 @@ export class ShipmentService {
 
 
   addShipment(title:string, content:string){
-    const shipment: Shipment={id:null,title: title, content:content, assignedTo: null};
+    const shipment: Shipment={id:null,title: title, content:content,status:null, assignedTo: null};
     this.http.post<{message: string, shipmentId: string}>('http://localhost:3000/api/shipments',shipment)
       .subscribe((responseData) => {
         console.log(responseData.message);
@@ -92,7 +73,7 @@ export class ShipmentService {
 }
 
   assignShipment(assignTo: string, shipmentId: string){
-    const shipment: Shipment= {id: shipmentId, title: null, content: null, assignedTo: assignTo};
+    const shipment: Shipment= {id: shipmentId, title: null, content: null, status: null, assignedTo: assignTo};
     console.log(shipmentId);
     this.http.put<{message: string, shipmentId: any}>("http://localhost:3000/api/shipments/" + shipmentId,  shipment )
       .subscribe(response => {
@@ -100,6 +81,7 @@ export class ShipmentService {
       });
   }
   getUserShipments(userName: string){
+    this.userName = userName;
     const user = {userName: userName};
     this.http.put<{message:string, shipments: any}>("http://localhost:3000/api/shipments/", user )
       .pipe(map((shipmentData) => {
@@ -108,6 +90,7 @@ export class ShipmentService {
             title: shipment.title,
             content: shipment.content,
             id: shipment._id,
+            status: shipment.status,
             assignedTo: shipment.assignedTo
           }
         });
@@ -125,6 +108,16 @@ export class ShipmentService {
     });
   }
 
+  updateShipment(id: string){
+    this.http.get<{message:string, shipments: any}>("http://localhost:3000/api/shipments/update/" + id )
+      .subscribe(response => {
+        console.log("Status will update after " + response.message + " second");
+        setTimeout(() => {
+          this.getUserShipments(this.userName);
+        }, parseInt(response.message + 2)   *  1000)
+      });
+  }
+
 
   deleteShipment(shipmentId: string) {
     this.http.delete("http://localhost:3000/api/shipments/" + shipmentId)
@@ -134,5 +127,6 @@ export class ShipmentService {
         this.shipmentsUpdated.next([...this.shipments]);
       })
   }
+
 }
 

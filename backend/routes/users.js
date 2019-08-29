@@ -9,7 +9,7 @@ router.get("", (req,res,next) => {
   User.find({type: 'worker'})
     .then(documents => {
       res.status(200).json({
-        message: 'Users fetched successfully!',
+        message: 'Workers fetched successfully!',
         users: documents
       });
     });
@@ -62,6 +62,7 @@ router.post("/login", (req,res,next) => {
         "secret_this_should_be_longer",
         {expiresIn: "1h"}
       );
+
       res.status(200).json({
         token: token,
         expiresIn: 3600,
@@ -74,6 +75,14 @@ router.post("/login", (req,res,next) => {
       return res.status(401).json({
         message: 'Auth Failed'
       });
+    });
+});
+
+router.delete("/:id", (req, res, next) => {
+  User.deleteOne({_id: req.params.id})
+    .then(result => {
+      console.log(result);
+      res.status(200).json({message: "Worker Deleted!"});
     });
 });
 

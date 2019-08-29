@@ -9,7 +9,8 @@ const router = express.Router();
 router.post("", (req,res,next) => {
   const shipment = new Shipment({
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    status: 'Not Shipped Yet'
   });
   shipment.save()
     .then(createdShipment => {
@@ -18,6 +19,33 @@ router.post("", (req,res,next) => {
         shipmentId: createdShipment._id
       });
     });
+});
+
+router.get("/update/:id", (req,res,next) => {
+  console.log(req.params.id);
+  const randomNumber =  Math.floor(Math.random() * Math.floor(60));
+  res.status(200).json({message: randomNumber});
+  setTimeout(() => {
+    Shipment.findById(req.params.id).then(shipment => {
+        if(shipment){
+          if(shipment.status === 'Not Shipped Yet'){
+            Shipment.updateOne({_id: req.params.id}, {
+              status: 'Shipped'
+            }).then(response => {
+              res.status(200).json({message: "Status Updated Successfully", response});
+            });
+          }
+          if(shipment.status === 'Shipped'){
+            Shipment.updateOne({_id: req.params.id}, {
+              status: 'Received by Client'
+            }).then(response => {
+              res.status(200).json({message: "Status Updated Successfully", response});
+            });
+          }
+        }
+    })
+  }, randomNumber * 1000);
+
 });
 
 router.put("", (req,res,next) => {
@@ -38,11 +66,15 @@ router.put("", (req,res,next) => {
           User.updateOne({name: req.body.assignedTo},
             {$push: {assignedShipments: req.body.id}})
             .then(() => {
-              Shipment.updateOne({_id: req.params.id},
+              Shipment.updateOne({$and: [{_id: req.params.id }, {assignedTo: {$ne: req.body.assignedTo}}]},
                 {$push: {assignedTo: req.body.assignedTo}})
                 .then(response => {
+                  if(response.nModified > 0){
                   res.status(200).json({message: 'Shipment assigned Successfully!'});
-                });
+                  }else{
+                    res.status(200).json({message: 'Shipment already assigned to this User!'});
+                  }
+                })
             })
         }
       })

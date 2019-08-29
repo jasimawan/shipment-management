@@ -3,10 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {AuthData} from './auth-data.model';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   private isAuthenticated = false;
+  private workers: AuthData[] = [];
+  private workersUpdated = new Subject<AuthData[]>();
   private token: string;
   private tokenTimer: any;
   private userId: string;
@@ -33,7 +36,7 @@ export class AuthService {
   }
 
   createUser(email: string, name: string, type: string, password: string){
-    const authData: AuthData = {email: email, name: name, type: type, password: password};
+    const authData: AuthData = {id: null, email: email, name: name, type: type, password: password};
     console.log(type);
     this.http.post("http://localhost:3000/api/users/signup", authData)
       .subscribe(response => {
@@ -43,7 +46,7 @@ export class AuthService {
   }
 
   login(email: string, password: string){
-    const authData: AuthData = {email:email, name: null, type: null ,password:password};
+    const authData: AuthData = {id: null, email:email, name: null, type: null ,password:password};
     this.http.post<{token: string, expiresIn: number, userId: string, userType: string, userName: string}>("http://localhost:3000/api/users/login", authData)
       .subscribe(response => {
         const token = response.token;
@@ -132,6 +135,37 @@ export class AuthService {
       userName: userName
 
     }
+  }
+
+  getWorkers(){
+    this.http.get<{message: string, users: any}>("http://localhost:3000/api/users/")
+      .pipe(map((userData) => {
+        return userData.users.map(user => {
+          return {
+            name: user.name,
+            type: user.type,
+            id: user._id
+          }
+        });
+      }))
+      .subscribe(usersData => {
+        this.workers = usersData;
+        this.workersUpdated.next([...this.workers])
+      })
+  }
+
+  getWorkersUpdateListener() {
+    return this.workersUpdated.asObservable();
+  }
+
+
+  deleteWorker(id: string){
+    this.http.delete("http://localhost:3000/api/users/" + id)
+      .subscribe(() => {
+        const updatedWorkers = this.workers.filter(worker => worker.id !== id);
+        this.workers = updatedWorkers;
+        this.workersUpdated.next([...this.workers]);
+      })
   }
 }
 

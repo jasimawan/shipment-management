@@ -5,7 +5,7 @@ const shipmentSchema = mongoose.Schema({
   title: {type: String, required: true},
   content: {type: String, required: true},
   status: {type: String, required: false},
-  assignedTo: {type: Array, Default: [], required: false}
+  assignedTo: {type: Array, Default: [], required: false, unique: true}
 });
 
 shipmentSchema.plugin(uniqueValidator);
