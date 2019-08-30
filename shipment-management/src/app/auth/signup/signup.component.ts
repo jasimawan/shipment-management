@@ -23,7 +23,7 @@ export class SignupComponent {
       return;
     }
     this.isLoading = true;
-    this.authService.createUser(form.value.email, form.value.name, this.selectedValue, form.value.password);
+    this.authService.createUser(form.value.email.trim(), form.value.name.trim(), this.selectedValue, form.value.password);
   }
 }
 

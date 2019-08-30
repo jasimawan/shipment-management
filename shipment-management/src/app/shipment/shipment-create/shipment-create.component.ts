@@ -19,7 +19,7 @@ export class ShipmentCreateComponent {
       return;
     }
     this.isLoading = true;
-    this.shipmentService.addShipment(form.value.title, form.value.content);
+    this.shipmentService.addShipment(form.value.title.trim(), form.value.content.trim());
     form.resetForm();
 
   }

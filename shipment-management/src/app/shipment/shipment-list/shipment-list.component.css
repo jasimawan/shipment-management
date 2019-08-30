@@ -6,7 +6,9 @@
 .info-text {
   text-align: center;
 }
-
+mat-expansion-panel-header{
+  word-break: break-all;
+}
 mat-spinner {
   margin: auto;
 }
@@ -17,4 +19,5 @@ mat-spinner {
 
 .details {
   margin-left: 3rem;
+  word-break: break-all;
 }

@@ -21,7 +21,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-  <h1 *ngIf="userIsAuthenticated"  class="mid">Workers</h1>
+  <h1 *ngIf="userIsAuthenticated && userType === 'admin'"  class="mid">Workers</h1>
   <p class="info-text mat-body-1" *ngIf="workers.length <=0 && !isLoading && userIsAuthenticated" >No Workers added yet!</p>
   <mat-accordion  multi="true" *ngIf="shipments.length > 0 && !isLoading && userIsAuthenticated && userType === 'admin'">
     <mat-expansion-panel *ngFor="let worker of workers">

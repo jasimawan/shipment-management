@@ -1,0 +1,18 @@
+version: '3.8'| # specify docker compose version
+
+#Define the services/containers to be run
+
+services: 
+    angular: #name of first service
+        build: shipment-managemnt #directory of dockerfile
+        ports: - "4200:4200" 
+
+    express: #name of 2nd service
+        build: backend #directory of dockerfile
+        links: 
+              - database #link this service to database
+
+    database: #name of 2nd service
+        image: mongo #specify image to build container from
+        ports: 
+            - "3000:3000" 
