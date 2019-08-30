@@ -19,11 +19,11 @@
       <button mat-button color="warn" (click)="onDelete(shipment.id)">DELETE</button>
     </mat-action-row>
   </mat-expansion-panel>
-
+</mat-accordion>
 
   <h1 *ngIf="userIsAuthenticated"  class="mid">Workers</h1>
   <p class="info-text mat-body-1" *ngIf="workers.length <=0 && !isLoading && userIsAuthenticated" >No Workers added yet!</p>
-  <mat-accordion>
+  <mat-accordion  multi="true" *ngIf="shipments.length > 0 && !isLoading && userIsAuthenticated && userType === 'admin'">
     <mat-expansion-panel *ngFor="let worker of workers">
       <mat-expansion-panel-header>
         {{worker.name}}
@@ -34,7 +34,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-</mat-accordion>
+
 
 
 <mat-accordion multi="true" *ngIf="shipments.length > 0 && !isLoading && userIsAuthenticated && userType === 'worker'">
