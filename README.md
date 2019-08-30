@@ -38,7 +38,8 @@ THE BACKEND SERVER IS DEPLOYED USING MONGODB ATLAS SO IF YOU FACE TROUBLE CONNEC
   jsonwebtoke,
   bcryptjs,
   mongoose-unique-validator,
-  jest
+  jest,
+  TRAVIS CI is used for backend
   
   
 
