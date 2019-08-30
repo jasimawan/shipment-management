@@ -18,6 +18,7 @@ mongoose.connect("mongodb+srv://jasim:cnO1IhmAgISCZe1o@cluster0-mpdvd.mongodb.ne
 
 
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({extend:false}));
 
 app.use((req,res,next) => {
