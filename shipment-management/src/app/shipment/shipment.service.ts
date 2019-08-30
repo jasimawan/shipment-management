@@ -18,6 +18,19 @@ export class ShipmentService {
 
   constructor(private http: HttpClient, private router: Router, public dialog: MatDialog) {}
 
+  addShipment(title:string, content:string){
+    const shipment: Shipment={id:null,title: title, content:content,status:null, assignedTo: null};
+    this.http.post<{message: string, shipmentId: string}>('http://localhost:3000/api/shipments',shipment)
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        const id = responseData.shipmentId;
+        shipment.id = id;
+        this.shipments.push(shipment);
+        this.shipmentsUpdated.next([...this.shipments]);
+        this.router.navigate(["/"]);
+      });
+}
+
   getShipments() {
     this.http.get<{message:string, shipments: any}>('http://localhost:3000/api/shipments')
       .pipe(map((shipmentData) => {
@@ -37,49 +50,6 @@ export class ShipmentService {
       });
   }
 
-
-  getAssignedWorkers(shipmentId : string) {
-    this.http.get<{message: string, assignedTo: any}>("http://localhost:3000/api/shipments/" +shipmentId)
-      .subscribe(shipment => {
-        this.assignedWorkers = shipment.assignedTo;
-      })
-  }
-
-  getShipmentId(shipmentId : string){
-    this.shipmentId = shipmentId;
-  }
-
-
-  getAssignedWorkersUpdateListener() {
-    return this.assignedWorkers;
-  }
-
-  getShipmentUpdateListener() {
-    return this.shipmentsUpdated.asObservable();
-  }
-
-
-  addShipment(title:string, content:string){
-    const shipment: Shipment={id:null,title: title, content:content,status:null, assignedTo: null};
-    this.http.post<{message: string, shipmentId: string}>('http://localhost:3000/api/shipments',shipment)
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        const id = responseData.shipmentId;
-        shipment.id = id;
-        this.shipments.push(shipment);
-        this.shipmentsUpdated.next([...this.shipments]);
-        this.router.navigate(["/"]);
-      });
-}
-
-  assignShipment(assignTo: string, shipmentId: string){
-    const shipment: Shipment= {id: shipmentId, title: null, content: null, status: null, assignedTo: assignTo};
-    console.log(shipmentId);
-    this.http.put<{message: string, shipmentId: any}>("http://localhost:3000/api/shipments/" + shipmentId,  shipment )
-      .subscribe(response => {
-        console.log(response);
-      });
-  }
   getUserShipments(userName: string){
     this.userName = userName;
     const user = {userName: userName};
@@ -101,12 +71,46 @@ export class ShipmentService {
       })
   }
 
+  getShipmentId(shipmentId : string){
+    this.shipmentId = shipmentId;
+  }
+
+
+  getAssignedWorkersUpdateListener() {
+    return this.assignedWorkers;
+  }
+
+  getShipmentUpdateListener() {
+    return this.shipmentsUpdated.asObservable();
+  }
+
+
+
+  getAssignedWorkers(shipmentId : string) {
+    this.http.get<{message: string, assignedTo: any}>("http://localhost:3000/api/shipments/" +shipmentId)
+      .subscribe(shipment => {
+        this.assignedWorkers = shipment.assignedTo;
+      })
+  }
+
+
+  assignShipment(assignTo: string, shipmentId: string){
+    const shipment: Shipment= {id: shipmentId, title: null, content: null, status: null, assignedTo: assignTo};
+    console.log(shipmentId);
+    this.http.put<{message: string, shipmentId: any}>("http://localhost:3000/api/shipments/" + shipmentId,  shipment )
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
+
   openDialog() {
     const dialogRef = this.dialog.open(AssignShipmentComponent, {
       width: '250px',
       data : this.shipmentId
     });
   }
+
 
   updateShipment(id: string){
     this.http.get<{message:string, shipments: any}>("http://localhost:3000/api/shipments/update/" + id )
@@ -117,6 +121,7 @@ export class ShipmentService {
         }, parseInt(response.message + 2)   *  1000)
       });
   }
+
 
 
   deleteShipment(shipmentId: string) {

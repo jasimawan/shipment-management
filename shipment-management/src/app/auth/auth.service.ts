@@ -19,22 +19,6 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router){}
 
-  getToken() {
-    return this.token;
-  }
-
-  getIsAuth() {
-    return this.isAuthenticated;
-  }
-
-  getUser() {
-    return {userId: this.userId, userType: this.userType , userName: this.userName};
-  }
-
-  getAuthStatusListner() {
-    return this.authStatusListener.asObservable();
-  }
-
   createUser(email: string, name: string, type: string, password: string){
     const authData: AuthData = {id: null, email: email, name: name, type: type, password: password};
     console.log(type);
@@ -85,14 +69,20 @@ export class AuthService {
     }
   }
 
-  logout(){
-    this.token = null;
-    this.isAuthenticated = false;
-    this.authStatusListener.next(false);
-    this.userId = null;
-    clearTimeout(this.tokenTimer);
-    this.clearAuthData();
-    this.router.navigate(['/']);
+  getToken() {
+    return this.token;
+  }
+
+  getIsAuth() {
+    return this.isAuthenticated;
+  }
+
+  getUser() {
+    return {userId: this.userId, userType: this.userType , userName: this.userName};
+  }
+
+  getAuthStatusListner() {
+    return this.authStatusListener.asObservable();
   }
 
   private setAuthTimer(duration: number){
@@ -166,6 +156,16 @@ export class AuthService {
         this.workers = updatedWorkers;
         this.workersUpdated.next([...this.workers]);
       })
+  }
+
+  logout(){
+    this.token = null;
+    this.isAuthenticated = false;
+    this.authStatusListener.next(false);
+    this.userId = null;
+    clearTimeout(this.tokenTimer);
+    this.clearAuthData();
+    this.router.navigate(['/']);
   }
 }
 
