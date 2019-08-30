@@ -1,0 +1,1834 @@
+{
+	"info": {
+		"_postman_id": "a3637131-bfba-41aa-b298-9c2a0e2d90ce",
+		"name": "Shipment Managment RestAPI Documentation",
+		"description": "# Introduction\nThis is the api of Shipment Magement Portal where Admins can logs in and can create/delete/assign shipments to wokers and can create/delete workers. \n\n\n# Error Codes\nThere is a bug in this api where when admin click on the assign shipment button in shipments list. The already assigned workers does not show up at first. Admin have to close the dialog and then has to open again in order to see the already assigned wokers on the respective shipment.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/api/users/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"name\": \"postman\",\n\t\"type\": \"worker\",\n\t\"password\": \"1234\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				},
+				"description": "Admin will create worker/admin by providing following data email, name, type and password. Authentication is required for it on the front end and data should have uniqe email and name.[Admin Login required]"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/users/signup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"name\": \"postman\",\n\t\"type\": \"worker\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "235"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"eb-uLgrZrJ0PTS0BE8BRjpmaeFMmPY\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:39:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"User Created!\",\n    \"result\": {\n        \"assignedShipments\": [],\n        \"_id\": \"5d6926f59311392f2c86ae4d\",\n        \"email\": \"abc@postman.com\",\n        \"name\": \"postman\",\n        \"type\": \"worker\",\n        \"password\": \"$2a$10$H5mz6cQ4EyEW4yfoVLdBc.KbsXE7znzv61Bh0ZHyNrt76/l08/5N2\",\n        \"__v\": 0\n    }\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/users/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"name\": \"postman\",\n\t\"type\": \"worker\",\n\t\"password\": \"1234\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				},
+				"description": "Admin will not be able to create worker if email and name already exists in the database"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/users/signup",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"name\": \"postman\",\n\t\"type\": \"worker\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "57"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"39-jx2k4aF5AAXLCsWzrbO2Q6kUWgU\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:39:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"user with this email or name already exists\"\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/users/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"password\": \"1234\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				},
+				"description": "User when provide valid credentials i.e. email and password. He will be able to login after the credentials will be checked from database"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/users/login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "317"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13d-8OLKOcBQuirImlbyeSHPKmFdnUs\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:40:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0Bwb3N0bWFuLmNvbSIsInVzZXJJZCI6IjVkNjkyNmY1OTMxMTM5MmYyYzg2YWU0ZCIsImlhdCI6MTU2NzE3MjQ0NiwiZXhwIjoxNTY3MTc2MDQ2fQ.O9HUXls8ogYqTxOTMj6QWny9F9SbgcQdBaNdxuyR0I8\",\n    \"expiresIn\": 3600,\n    \"userId\": \"5d6926f59311392f2c86ae4d\",\n    \"userType\": \"worker\",\n    \"userName\": \"postman\"\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login , authData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login , authData"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/users/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login\", authData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login\", authData"
+					]
+				},
+				"description": "User when provide invalid credentials i.e. email and password. He will not be able to login after the credentials will be checked from database."
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login\", authData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login\", authData"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/users/login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"email\": \"abc@postman.com\",\n\t\"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-2lZsXD3aMlgfcZ414YwqgS6yf+U\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:42:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Auth Failed\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/users/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				},
+				"description": "When admin will try to assign shipments to users. He requires the workers. So wokers will be fetched through that request in the database. [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/users/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "449"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c1-CKZotdkzB2YbNeGW1OChsr9LN5k\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:43:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Workers fetched successfully!\",\n    \"users\": [\n        {\n            \"assignedShipments\": [],\n            \"_id\": \"5d68fe1e2c04242d00fe5f37\",\n            \"email\": \"saqib@gmail.com\",\n            \"name\": \"Saqib\",\n            \"type\": \"worker\",\n            \"password\": \"$2a$10$OAbmXCCUPANTe/ItorrIpuTRNnowNbOT09Gxg3S7Dx2SP4JeXIcGu\",\n            \"__v\": 0\n        },\n        {\n            \"assignedShipments\": [],\n            \"_id\": \"5d6926f59311392f2c86ae4d\",\n            \"email\": \"abc@postman.com\",\n            \"name\": \"postman\",\n            \"type\": \"worker\",\n            \"password\": \"$2a$10$H5mz6cQ4EyEW4yfoVLdBc.KbsXE7znzv61Bh0ZHyNrt76/l08/5N2\",\n            \"__v\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/users/ + id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/5d68fe3f2c04242d00fe5f39",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"5d68fe3f2c04242d00fe5f39"
+					]
+				},
+				"description": "Admin when press the delete button in front of any worker. He will be deleted [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/users/ + id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/5d68fe3f2c04242d00fe5f39",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"5d68fe3f2c04242d00fe5f39"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d-Ls9DD3KuT/9PWY9mJyKa6AV+FJs\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:45:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Worker Deleted!\"\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/ + id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								" + id"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments"
+					]
+				},
+				"description": "Admin when logs in. He will be get all the shipments created from the database or no shipment if not created. This request will call from ngOnit of shipments-list component.[Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "'http://localhost:3000/api/shipments'",
+							"protocol": "'http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments'"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/shipments",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "187"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"bb-cT/yYGmp1kMtFvlq0ovzf/CBn4E\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:47:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Shipments fetched successfully!\",\n    \"shipments\": [\n        {\n            \"assignedTo\": [],\n            \"_id\": \"5d68fe2d2c04242d00fe5f38\",\n            \"title\": \"First Shipment\",\n            \"content\": \"ship\",\n            \"status\": \"Not Shipped Yet\",\n            \"__v\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Post Shipment\",\n\t\"content\": \"Ship it\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments"
+					]
+				},
+				"description": "Admin can create shipment when logs in by providing the title and content of shipment. [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/shipments,shipment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Post Shipment\",\n\t\"content\": \"Ship it\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"51-7jak2bOhdrkjrBKXZxbaqBkPVeo\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:49:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Shipment Added successfully\",\n    \"shipmentId\": \"5d692979d83dd60e1c1797b3\"\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments,shipment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments,shipment"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments/ + shipmentId,  shipment",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"5d692979d83dd60e1c1797b3\",\n\t\"assignedTo\": \"postman\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments/5d692979d83dd60e1c1797b3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments",
+						"5d692979d83dd60e1c1797b3"
+					]
+				},
+				"description": "Admin can assign shipment to the workers created by selecting their names through a select option in the assign component. [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ + shipmentId,  shipment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" + shipmentId,  shipment"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/shipments/ + shipmentId,  shipment",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"5d692979d83dd60e1c1797b3\",\n\t\"assignedTo\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/5d692979d83dd60e1c1797b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								"5d692979d83dd60e1c1797b3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2d-WTtitOqX6BrxjRUHCU2E9QybxSY\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:55:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Shipment assigned Successfully!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments/ + shipmentId,  shipment",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"5d692979d83dd60e1c1797b3\",\n\t\"assignedTo\": \"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments/ 5d692979d83dd60e1c1797b3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments",
+						" 5d692979d83dd60e1c1797b3"
+					]
+				},
+				"description": "Admin can't be able to assign workers if no option(name of woker) will be selected and bad request will be thrown. [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ + shipmentId,  shipment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" + shipmentId,  shipment"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/shipments/ + shipmentId,  shipment",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"5d692979d83dd60e1c1797b3\",\n\t\"assignedTo\": \"\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ 5d692979d83dd60e1c1797b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" 5d692979d83dd60e1c1797b3"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d-NmTlnZZHAPKn6gBsm/UKrFrhufE\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:56:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"No Worker Found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments/ +shipmentId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments/ +shipmentId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments",
+						" +shipmentId"
+					]
+				},
+				"description": "When admin tries to assign shipment to workers. The workers who have already been assigned to respective shipment will be displayed on the tope of diaog component. This component is buggy. First time when you tries to assign the component will run without showing already assigned users but when you close it and run again. Assigned workers will be displayed. [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/shipments/ +shipmentId",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/5d692979d83dd60e1c1797b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								"5d692979d83dd60e1c1797b3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3e-qDNGvhS3iZBFiDGJcbWUGL/tvmo\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:57:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Assigned Workers found!\",\n    \"assignedTo\": [\n        \"postman\"\n    ]\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ +shipmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" +shipmentId"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments/ , user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments/ , user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments",
+						" , user"
+					]
+				},
+				"description": "When worker will login from his credentials.  He will get all the shipments assigned to him from the database or no shipment if not assigned. This request will call from ngOnit of shipments-list componen [Worker login Required]"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ , user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" , user"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/shipments/ , user",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "77"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4d-KKMZpa2QuwDncuXF6NsMtqTmSHo\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 13:59:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Workers assigned shipments fetched successfully!\",\n    \"shipments\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments/update/ + id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments/update/5d692979d83dd60e1c1797b3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments",
+						"update",
+						"5d692979d83dd60e1c1797b3"
+					]
+				},
+				"description": "Worker when click on the updated button of any shipment. A get request will be generated with shipment id and. The status of shipment will update after a random value of seconds user setTimeOut. Default status is 'Not Shipped Yet'. Status will updated from default to 'Shipped'. If the status will be 'Shipped' then it will change to 'Received by Client' [Worker login Required]"
+			},
+			"response": [
+				{
+					"name": "http://localhost:3000/api/shipments/update/ + id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/update/5d692979d83dd60e1c1797b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								"update",
+								"5d692979d83dd60e1c1797b3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "338"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"152-v7oHuFDttGBGPki8fWC145irvAA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 14:00:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Status Updated Successfully\",\n    \"response\": {\n        \"n\": 1,\n        \"nModified\": 1,\n        \"opTime\": {\n            \"ts\": \"6730960819443466241\",\n            \"t\": 1\n        },\n        \"electionId\": \"7fffffff0000000000000001\",\n        \"ok\": 1,\n        \"operationTime\": \"6730960819443466241\",\n        \"$clusterTime\": {\n            \"clusterTime\": \"6730960819443466241\",\n            \"signature\": {\n                \"hash\": \"P1/WqSaNMYoeQXXxHVMDTvusm6k=\",\n                \"keyId\": \"6727639972205035521\"\n            }\n        }\n    }\n}"
+				},
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/update/ + id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								"update",
+								" + id"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3000/api/shipments/ + shipmentId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/shipments/ + shipmentId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"shipments",
+						" + shipmentId"
+					]
+				},
+				"description": "Only admin can delete the shipments by clicking the delete button within every shipment. Request will delete the entire data of shipment from database.  [Admin login Required]"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ + shipmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" + shipmentId"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "http://localhost:3000/api/shipments/ + shipmentId",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/shipments/ 5d692979d83dd60e1c1797b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"shipments",
+								" 5d692979d83dd60e1c1797b3"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-Width, Content-Type, Accept, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-2lZsXD3aMlgfcZ414YwqgS6yf+U\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Aug 2019 14:02:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Auth Failed\"\n}"
+				}
+			]
+		}
+	]
+}
