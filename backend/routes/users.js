@@ -2,20 +2,11 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
+const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 
-router.get("", (req,res,next) => {
-  User.find({type: 'worker'})
-    .then(documents => {
-      res.status(200).json({
-        message: 'Workers fetched successfully!',
-        users: documents
-      });
-    });
-});
-
-router.post("/signup",(req,res,next)=> {
+router.post("/signup", (req,res,next)=> {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -78,11 +69,26 @@ router.post("/login", (req,res,next) => {
     });
 });
 
-router.delete("/:id", (req, res, next) => {
+router.get("", (req,res,next) => {
+  User.find({type: 'worker'})
+    .then(documents => {
+      res.status(200).json({
+        message: 'Workers fetched successfully!',
+        users: documents
+      });
+    });
+});
+
+router.delete("/:id",  (req, res, next) => {
   User.deleteOne({_id: req.params.id})
     .then(result => {
       console.log(result);
       res.status(200).json({message: "Worker Deleted!"});
+    })
+    .catch(err => {
+      return res.status(401).json({
+        message: 'Auth Failed'
+      });
     });
 });
 
