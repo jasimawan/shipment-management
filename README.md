@@ -24,7 +24,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-THE BACKEND SERVER IS DEPLOYED USING MONGODB ATLAS SO IF YOU FACE TROUBLE CONNECTING JUST GO TO app.js AND CHANGE THE CONNECTION STRING TO WITH YOUR OWN MONGO ATLAS STRING.
+THE BACKEND SERVER IS DEPLOYED USING MONGODB ATLAS SO IF YOU FACE TROUBLE CONNECTING JUST GO TO app.js OF BACKEND, AND CHANGE THE CONNECTION STRING TO WITH YOUR OWN MONGO ATLAS STRING.
+IN ORDER TO USE THE SYSTEM WITH NEW DATABASE. THERE WILL BE NO ADMIN CREATED IN IT AND THERE IS NO WAY ON THE STARTING PAGE TO CREATE IT THE FIRST TIME. AS ADMIN AND WORKERS CAN ONLY B CREATED WHEN THERE IS ALREADY AN EXISTING ADMIN IN THE DATABASE. SO IN ORDER TO CREATE IT. FOLLOW THE MENTIONED STEPS.
+1- GO TO shipment-management/src/app/app-routing.modules.ts.
+2- Remove the canActivate tag from sign-up route
+3- Run the front-end and backend using commands given in package.json of both.
+4- And go to the signup route by typing localhost:"port"/signup.
+5- Make a new admin and then place the canActivate tag again on signup route.
 
 
 ## TOOLS NEEDED TO RUN THIS PROJECT
